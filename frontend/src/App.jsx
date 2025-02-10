@@ -13,8 +13,7 @@ function App() {
     }
     axios.post('http://localhost:8080/api/short',{ogURL})
     .then((res)=>{
-      setShortURL(res.data.url.shortURL);
-      console.log("api response",res);
+      setShortURL(res.data);
     })
     .catch((error)=>console.log(error));
   };
@@ -33,14 +32,16 @@ function App() {
       {
         shortURL &&
         (
-
-          <a href={`http://localhost:8080/${shortURL}`} target="_blank">
-            <h1 class='shorty'>
-            http://localhost:8080/{shortURL}
-            </h1>
+          <h1 class='shorty'>
+            Shortened URL : <a href={`${shortURL.shorty}`} target="_blank">
+            {shortURL.shorty}
           </a>
-          
+          </h1>
         )
+      }
+      {
+        shortURL  &&
+        <img src={shortURL.qr} alt="" />
       }
     </div>
     </>

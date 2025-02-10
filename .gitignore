@@ -1,4 +1,2 @@
-# Ignore environment files in frontend & backend
-frontend/.env
-backend/.env
 .env
+node_modules

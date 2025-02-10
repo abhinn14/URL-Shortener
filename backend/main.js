@@ -8,6 +8,10 @@ import {nanoid} from 'nanoid';
 import dotenv from 'dotenv';
 dotenv.config();
 import URL from './model.js';
+import QRCode from 'qrcode';
+import path from 'path';
+
+const _dirname = path.resolve();
 
 mongoose.connect(process.env.dburl)
 .then(()=>{console.log("Database connected!!!");})
@@ -36,8 +40,11 @@ app.post('/api/short', async (req,res)=>{
             return res.status(500).json({message:"Failed to generate a unique short URL"});
         }
         const url = new URL({ogURL,shortURL});
+        const shorty = `http://localhost:8080/${shortURL}`;
+        const qr = await QRCode.toDataURL(shorty);
+
         await url.save();
-        return res.status(200).json({message:"URL Generated",url});
+        return res.status(200).json({shorty,qr});
     } catch (error) {
         console.log(error);
         res.status(500).json({message:"URL Not Generated",error});
@@ -49,7 +56,6 @@ app.get('/:shortURL',async (req,res)=> {
         const {shortURL} = req.params;
         const url = await URL.findOne({shortURL});
         if(url) {
-            url.clicks++;
             await url.save();
             return res.redirect(url.ogURL);
         }
@@ -60,6 +66,12 @@ app.get('/:shortURL',async (req,res)=> {
         console.log(error);
         res.status(501).json({message:"URL Not Generated",error});
     }
+});
+
+
+app.use(express.static(path.join(_dirname,"/frontend/dist")));
+app.get('*',(req,res)=>{
+    res.sendFile(path.resolve(_dirname,"frontend","dist","index.html"));
 });
 
 app.listen(8080,()=>{
