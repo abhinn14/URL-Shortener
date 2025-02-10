@@ -21,7 +21,7 @@ function App() {
   return (
     <>
     <div class='main'>
-      <h1 class='heading'>URL SHORTNER</h1>
+      <h1 class='heading'>URL SHORTENER</h1>
       <input placeholder='ENTER THE LINK HERE'
       value={ogURL}
       onChange={(e)=>{setOgURL(e.target.value)}}
