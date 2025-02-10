@@ -11,7 +11,7 @@ function App() {
       alert("PLEASE ENTER THE URL FIRST");
       return;
     }
-    axios.post('http://localhost:8080/api/short',{ogURL})
+    axios.post('https://shorty-2pi0.onrender.com/api/short',{ogURL})
     .then((res)=>{
       setShortURL(res.data);
     })

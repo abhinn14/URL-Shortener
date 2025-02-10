@@ -40,7 +40,8 @@ app.post('/api/short', async (req,res)=>{
             return res.status(500).json({message:"Failed to generate a unique short URL"});
         }
         const url = new URL({ogURL,shortURL});
-        const shorty = `http://localhost:8080/${shortURL}`;
+        // https://shorty-2pi0.onrender.com
+        const shorty = `https://shorty-2pi0.onrender.com/${shortURL}`;
         const qr = await QRCode.toDataURL(shorty);
 
         await url.save();
