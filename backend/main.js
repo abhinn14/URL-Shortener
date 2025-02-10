@@ -23,6 +23,10 @@ app.post('/api/short', async (req,res)=>{
         if(!ogURL) {
             res.status(404).json({message:"Enter URL PLS",error});
         }
+
+        if (!/^https?:\/\//i.test(ogURL)) {
+            ogURL = `https://${ogURL}`;
+        }
         
         let shortURL = nanoid(3);
         let collision = await URL.findOne({shortURL});
@@ -57,7 +61,6 @@ app.get('/:shortURL',async (req,res)=> {
         const {shortURL} = req.params;
         const url = await URL.findOne({shortURL});
         if(url) {
-            await url.save();
             return res.redirect(url.ogURL);
         }
         else {
