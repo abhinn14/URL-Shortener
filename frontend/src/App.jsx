@@ -19,7 +19,7 @@ function App() {
       alert("URL is already short");
       return;
     }
-    axios.post('https://shorty-2pi0.onrender.com/api/short',{f_url})
+    axios.post('https://shorty-2pi0.onrender.com/api/short',{ogURL:f_url})
     .then((res)=>{
       setShortURL(res.data);
     })
