@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function App() {
 
-  let [ogURL,setOgURL] = useState('');
+  const [ogURL,setOgURL] = useState('');
   const [shortURL,setShortURL] = useState('');
 
   const handleShrink = () => {
