@@ -17,6 +17,10 @@ function App() {
       alert("Enter valid URL");
       return;
     }
+    ogURL = ogURL.trim();
+    if(!/^https?:\/\//i.test(ogURL)) {
+      ogURL = `https://${ogURL}`;
+    }
     if(ogURL.length<=40) {
       alert("URL is already short");
       return;

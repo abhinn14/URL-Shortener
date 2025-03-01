@@ -20,10 +20,6 @@ mongoose.connect(process.env.dburl)
 app.post('/api/short', async (req,res)=>{
     try {
         let {ogURL} = req.body;
-        ogURL = ogURL.trim();
-        if (!/^https?:\/\//i.test(ogURL)) {
-            ogURL = `https://${ogURL}`;
-        }
         
         let shortURL = nanoid(3);
         let collision = await URL.findOne({shortURL});
