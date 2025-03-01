@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
+import validUrl from 'valid-url';
 
 function App() {
 
@@ -9,6 +10,15 @@ function App() {
   const handleShrink = () => {
     if(!ogURL) {
       alert("PLEASE ENTER THE URL FIRST");
+      return;
+    }
+    if(validUrl.isUri(ogURL)){
+    } else {
+      alert("Enter valid URL");
+      return;
+    }
+    if(ogURL.length<=40) {
+      alert("URL is already short");
       return;
     }
     axios.post('https://shorty-2pi0.onrender.com/api/short',{ogURL})

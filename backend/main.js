@@ -20,9 +20,6 @@ mongoose.connect(process.env.dburl)
 app.post('/api/short', async (req,res)=>{
     try {
         let {ogURL} = req.body;
-        if(!ogURL) {
-            res.status(404).json({message:"Enter URL PLS",error});
-        }
         ogURL = ogURL.trim();
         if (!/^https?:\/\//i.test(ogURL)) {
             ogURL = `https://${ogURL}`;
