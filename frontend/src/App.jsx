@@ -4,7 +4,7 @@ import validUrl from 'valid-url';
 
 function App() {
 
-  const [ogURL,setOgURL] = useState('');
+  let [ogURL,setOgURL] = useState('');
   const [shortURL,setShortURL] = useState('');
 
   const handleShrink = () => {
