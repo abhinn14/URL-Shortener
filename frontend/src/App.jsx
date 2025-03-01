@@ -11,15 +11,15 @@ function App() {
       alert("PLEASE ENTER THE URL FIRST");
       return;
     }
-    ogURL = ogURL.trim();
-    if(!/^https?:\/\//i.test(ogURL)) {
-      ogURL = `https://${ogURL}`;
+    let f_url = ogURL.trim();
+    if(!/^https?:\/\//i.test(f_url)) {
+      f_url = `https://${f_url}`;
     }
-    if(ogURL.length<=40) {
+    if(f_url.length<=40) {
       alert("URL is already short");
       return;
     }
-    axios.post('https://shorty-2pi0.onrender.com/api/short',{ogURL})
+    axios.post('https://shorty-2pi0.onrender.com/api/short',{f_url})
     .then((res)=>{
       setShortURL(res.data);
     })
